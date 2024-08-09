@@ -7,6 +7,8 @@ button{border-radius:8px;border:1px solid transparent;padding:.6em 1.2em;font-si
 button:hover{border-color:#646cff}
 button:focus,button:focus-visible{outline:4px auto -webkit-focus-ring-color}
 img{width:200px}
+.content-cards{display:flex;flex-wrap:wrap;justify-content:space-evenly;gap:20px;padding:20px}
+.content-card{flex:1 0 200px;border:1px solid;padding:15px}
 @media (prefers-color-scheme:light){
 :root{color:#213547;background-color:#fff}
 a:hover{color:#747bff}
