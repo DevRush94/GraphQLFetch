@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_CONTENT_CARDS } from './queries/content';
 import { Box, Spinner, Grid, Flex, Center } from '@chakra-ui/react';
@@ -7,19 +7,24 @@ import ContentCard from './components/ContentCard';
 
 const App: React.FC = () => {
   const [keywords, setKeywords] = useState<string>('');
+  const [debouncedKeywords, setDebouncedKeywords] = useState<string>('');
   const { loading, error, data, fetchMore } = useQuery(GET_CONTENT_CARDS, {
-    variables: { keywords, limit: 40 },
+    variables: { keywords: debouncedKeywords, limit: 40 },
   });
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedKeywords(keywords);
+    }, 300);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [keywords]);
 
   const handleSearch = useCallback((searchTerm: string) => {
     setKeywords(searchTerm);
-    fetchMore({
-      variables: { keywords: searchTerm, limit: 40 },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        return fetchMoreResult ? fetchMoreResult : prev;
-      },
-    });
-  }, [fetchMore]);
+  }, []);
 
   const handleScroll = useCallback(() => {
     if (
@@ -27,26 +32,22 @@ const App: React.FC = () => {
       document.documentElement.offsetHeight
     ) {
       fetchMore({
-        variables: { keywords, limit: 40, start: data.contentCards.edges.length },
+        variables: { keywords: debouncedKeywords, limit: 20 },
       });
     }
-  }, [keywords, fetchMore, data]);
+  }, [debouncedKeywords, fetchMore, data]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
 
   return (
-    <Box className="app" >
+    <Box className="app">
       <Header keywords={keywords} setKeywords={setKeywords} onSearch={handleSearch} />
       <Box className="content-cards" mt={2} p={4}>
         {loading && (
-          <Flex
-            height="200px"
-            alignItems="center"
-            justifyContent="center"
-          >
+          <Flex height="200px" alignItems="center" justifyContent="center">
             <Spinner size="lg" />
           </Flex>
         )}
