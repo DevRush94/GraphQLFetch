@@ -16,4 +16,10 @@ button,input,textarea{appearance:none;-webkit-appearance:none;-ms-appearance:non
 ::-webkit-scrollbar-thumb{background:#fff;transition:.3s all ease-in-out}
 ::-webkit-scrollbar-thumb:hover{background:#ff5900}
 input:-webkit-autofill,input:-webkit-autofill:active,input:-webkit-autofill:focus,input:-webkit-autofill:hover{-webkit-transition-delay:9999s;transition-delay:9999s}
-.content-cards{max-width:1370px;margin-left:auto;margin-right:auto;width:100%}
+.content-cards{max-width:1600px;margin-left:auto;margin-right:auto;width:100%}
+.content-cards .icon{position:absolute;left:8px;bottom:8px}
+.content-card{transform:none;transition:.3s all ease-in-out}
+.content-card:hover{transform:scale(1.02)}
+.myBadge{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.7);border-radius:35px;padding:3px 8px;color:#fff;display:flex;align-items:center;gap:5px;font-size:12px;font-weight:700}
+.myCompleted{position:absolute;left:0;top:0;padding:5px 10px;color:#000;display:flex;align-items:center;gap:4px;font-size:12px;background:#fff;font-weight:700;border-bottom-right-radius:8px}
+.circularProgress{border:1px solid #ff5900;border-radius:50%;overflow:hidden}

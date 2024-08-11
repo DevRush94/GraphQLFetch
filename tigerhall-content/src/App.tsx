@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_CONTENT_CARDS } from './queries/content';
-import { Box, Spinner, Grid, Flex, Center } from '@chakra-ui/react';
+import { Box, Spinner, Grid, Flex } from '@chakra-ui/react';
 import Header from './components/Header';
 import ContentCard from './components/ContentCard';
 
@@ -61,6 +61,7 @@ const App: React.FC = () => {
                 name={card.name}
                 image={card.image.uri.replace('https://images.staging.tigerhall.io/', 'https://images.staging.tigerhall.io/resize/244x122/')}
                 categories={card.categories.map((c: any) => c.name)}
+                hr={card.length%60}
                 experts={card.experts}
               />
             ))}
