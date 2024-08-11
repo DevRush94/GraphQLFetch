@@ -1,6 +1,6 @@
 import React from 'react';
-import { Input, Flex, Box, InputGroup, InputLeftElement } from '@chakra-ui/react';
-import { SearchIcon } from '@chakra-ui/icons'; // Import the search icon
+import { Input, Flex, Box, InputGroup, InputLeftElement, useBreakpointValue } from '@chakra-ui/react';
+import { SearchIcon } from '@chakra-ui/icons';
 interface SearchProps {
   keywords: string;
   onSearch: (searchTerm: string) => void;
@@ -29,27 +29,36 @@ const Search: React.FC<SearchProps> = React.memo(({ keywords, setKeywords }) => 
     </a>
   );
 
-
+  const MobileLogo = () => (
+    <a href='/'>
+      <svg xmlns="http://www.w3.org/2000/svg" width="41" height="64" viewBox="0 0 41 64" fill="none">
+        <path d="M21.8454 42.8486H22.06C24.2373 42.8486 26.4148 42.8486 28.5925 42.8486C28.9093 42.8278 29.2248 42.9045 29.4966 43.0686C29.7684 43.2326 29.9833 43.4761 30.1124 43.7661C30.2215 44.0019 30.2705 44.261 30.2551 44.5204C30.2397 44.7797 30.1603 45.0312 30.024 45.2525C29.8878 45.4737 29.6989 45.6577 29.4741 45.7882C29.2494 45.9186 28.9959 45.9914 28.7363 46H28.7164C22.9971 46 17.2777 46 11.558 46C11.1482 45.9963 10.7559 45.8326 10.4649 45.5439C10.174 45.2552 10.0072 44.8643 10.0002 44.4545C9.99325 44.0446 10.1466 43.6483 10.4276 43.3498C10.7086 43.0514 11.095 42.8745 11.5045 42.8568C11.8934 42.8395 12.2838 42.8492 12.6737 42.8492H18.3918V35.3691H16.7287V41.4807H13.3649V41.3038C13.3649 36.2916 13.3649 31.2798 13.3649 26.2683C13.3444 26.0404 13.3707 25.8107 13.4421 25.5934C13.5135 25.376 13.6285 25.1755 13.7801 25.0041C13.9316 24.8327 14.1166 24.694 14.3236 24.5965C14.5306 24.4991 14.7553 24.4448 14.9839 24.4372C15.2126 24.4296 15.4404 24.4687 15.6535 24.5521C15.8665 24.6355 16.0603 24.7616 16.2229 24.9225C16.3856 25.0834 16.5137 25.2758 16.5995 25.4879C16.6852 25.7 16.7268 25.9274 16.7216 26.1561C16.7323 26.8075 16.7216 27.4594 16.7216 28.1108C16.7216 29.3748 16.7216 30.6389 16.7216 31.9033V32.1072H18.3979V31.8962C18.3979 27.8642 18.3979 23.8322 18.3979 19.7999C18.3754 19.3566 18.5259 18.9219 18.8175 18.5873C19.1092 18.2527 19.5194 18.0445 19.9616 18.0063C20.4039 17.9682 20.8436 18.1032 21.1883 18.3829C21.5329 18.6627 21.7555 19.0652 21.8092 19.5059C21.8228 19.6275 21.8293 19.7499 21.8286 19.8723C21.8286 23.8764 21.8286 27.8806 21.8286 31.8849V32.1067H23.3138V31.9028C23.3138 30.0091 23.3138 28.1157 23.3138 26.2224C23.2974 25.9949 23.3275 25.7665 23.4022 25.5509C23.4768 25.3354 23.5946 25.1374 23.7482 24.9688C23.9018 24.8002 24.0881 24.6646 24.2958 24.5703C24.5035 24.476 24.7281 24.4248 24.9562 24.4201C25.1842 24.4153 25.4108 24.457 25.6223 24.5425C25.8337 24.6281 26.0255 24.7557 26.1861 24.9177C26.3466 25.0797 26.4725 25.2727 26.5562 25.4849C26.6398 25.6971 26.6794 25.9241 26.6726 26.1521C26.6726 26.2076 26.6726 26.2632 26.6726 26.3192V41.4807H23.3199V35.3645H21.8418L21.8454 42.8486Z" fill="#FF5900" />
+      </svg>
+    </a>
+  )
+  const LogoComponent = useBreakpointValue({
+    base: <MobileLogo />,
+    md: <Logo />,
+  });
   return (
-    <Box className="header" p={4} boxShadow="lg" backgroundColor={'#070708'} >
+    <Box className="header" px={4} boxShadow="lg" backgroundColor={'#070708'} >
       <Flex alignItems="center" justifyContent="space-between" gap={5}>
-        <Box pl={1}><Logo /></Box>
+        <Box pl={1}>{LogoComponent}</Box>
         <Box flex="1 0 auto" display="flex" justifyContent="center">
-          <InputGroup maxW="400px">
+          <InputGroup maxW="200px">
             <InputLeftElement pointerEvents="none">
               <SearchIcon color="gray.300" />
             </InputLeftElement>
             <Input
               value={keywords}
               onChange={handleInputChange}
-              placeholder="Search for content..."
+              placeholder="Search..."
               variant="filled"
               backgroundColor={'#383733 !important'}
             />
           </InputGroup>
         </Box>
-        <Box width="110px" />
-        {/* Artifical Width for Spacer to maintain centering */}
+        <Box display={{ base: "none", md: "block" }} flex="0 1 110px" /> {/* Artifical Width for Spacer to maintain centering */}
       </Flex>
     </Box>
 
