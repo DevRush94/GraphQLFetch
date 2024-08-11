@@ -13,7 +13,7 @@ a::-moz-focus-inner{border:0}
 a,a:focus,a:hover,p a:active{color:inherit;outline:0;text-decoration:none}
 button,input,textarea{appearance:none;-webkit-appearance:none;-ms-appearance:none;outline:0;border:none;font-family:inherit;border-radius:0}
 ::-webkit-scrollbar{background:#0e0f0f;width:8px}
-::-webkit-scrollbar-thumb{background:#fff;transition:.3s all ease-in-out}
+::-webkit-scrollbar-thumb{background:#fff;transition:.3s all ease-in-out;border:4px double #ff5900}
 ::-webkit-scrollbar-thumb:hover{background:#ff5900}
 input:-webkit-autofill,input:-webkit-autofill:active,input:-webkit-autofill:focus,input:-webkit-autofill:hover{-webkit-transition-delay:9999s;transition-delay:9999s}
 .content-cards{max-width:1600px;margin-left:auto;margin-right:auto;width:100%}
@@ -23,3 +23,10 @@ input:-webkit-autofill,input:-webkit-autofill:active,input:-webkit-autofill:focu
 .myBadge{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.7);border-radius:35px;padding:3px 8px;color:#fff;display:flex;align-items:center;gap:5px;font-size:12px;font-weight:700}
 .myCompleted{position:absolute;left:0;top:0;padding:5px 10px;color:#000;display:flex;align-items:center;gap:4px;font-size:12px;background:#fff;font-weight:700;border-bottom-right-radius:8px}
 .circularProgress{border:1px solid #ff5900;border-radius:50%;overflow:hidden}
+.loader{width:100px;aspect-ratio:.5;--c:no-repeat linear-gradient(#ff5900 0 0);background:var(--c) 0 100%,var(--c) 50% 100%,var(--c) 100% 100%;background-size:20% 65%;animation:l5 1s infinite linear;border-bottom:10px solid #ff5900}
+@keyframes l5{
+20%{background-position:0 50%,50% 100%,100% 100%}
+40%{background-position:0 0,50% 50%,100% 100%}
+60%{background-position:0 100%,50% 0,100% 50%}
+80%{background-position:0 100%,50% 100%,100% 0}
+}

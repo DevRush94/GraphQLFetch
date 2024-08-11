@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_CONTENT_CARDS } from './queries/content';
-import { Box, Spinner, Grid, Flex } from '@chakra-ui/react';
+import { Box, Grid, Flex } from '@chakra-ui/react';
 import Header from './components/Header';
 import ContentCard from './components/ContentCard';
 
@@ -46,11 +46,7 @@ const App: React.FC = () => {
     <Box className="app">
       <Header keywords={keywords} setKeywords={setKeywords} onSearch={handleSearch} />
       <Box className="content-cards" mt={2} p={4}>
-        {loading && (
-          <Flex height="200px" alignItems="center" justifyContent="center">
-            <Spinner size="lg" />
-          </Flex>
-        )}
+        {loading && (<Flex height="calc(100vh - 140px)" alignItems="center" justifyContent="center"> <div className="loader"></div> </Flex>)}
         {(error || data?.contentCards?.edges?.length === 0) && <Box textAlign={"center"}>No Result Found</Box>}
         <Grid templateColumns="repeat(auto-fill, minmax(244px, 1fr))" gap={8}>
           {data &&
@@ -61,7 +57,7 @@ const App: React.FC = () => {
                 name={card.name}
                 image={card.image.uri.replace('https://images.staging.tigerhall.io/', 'https://images.staging.tigerhall.io/resize/244x122/')}
                 categories={card.categories.map((c: any) => c.name)}
-                hr={card.length%60}
+                hr={card.length % 60}
                 experts={card.experts}
               />
             ))}
