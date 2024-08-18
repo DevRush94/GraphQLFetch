@@ -1,5 +1,5 @@
-#Hosted on
-Rush-podcast-content.surge.sh
+# Hosted on
+[Rush-podcast-content.surge.sh](http://Rush-podcast-content.surge.sh)
 
 # React + TypeScript + Vite
 
